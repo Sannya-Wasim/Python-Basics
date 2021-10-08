@@ -1,0 +1,50 @@
+#One way to read or write a file in Python is to use 
+#the built-in open function. The open function provides a 
+#File object that contains the methods and attributes you 
+#need in order to read, save, and manipulate the file.
+
+# we read the file using an example txt file
+ex1="Example1"
+file1=open(ex1,"r")
+
+file1.name #print path name of file
+file1.mode  #print the mode of file
+# We can read the file and assign it to a variable
+filecontent=file1.read()
+print(filecontent)
+# type of file content
+type(file1)
+#It is very important that the file is closed in the end. This frees up resources and ensures consistency across different python versions.
+file1.close()
+"""Using the with statement is better practice, it
+automatically closes the file even if the code 
+encounters an exception. The code will run everything
+in the indent block then close the file object."""
+
+with open(example1,"r") as file1
+	file_conent=file1.read()
+		print(file_content)# see the info in the file
+
+# verify if file is closed
+file1.closed()  # true
+
+# if we want to read certain characters or lines we can pass a number to the read method
+print(file1.read(4)) # this reads the first 4 characters inside the file
+print(file1.read(5)) # this reads the next 5 characters since the read method is already called once
+
+# we can also read one line at a time using readline method
+print("first line : "+fle1.readline())
+# unlike the read() method, readline() cannot read more than one line npo matter how many arguments are passed 
+
+#we can use a loop to iterate through each line
+i=0
+for i in file1
+	print(i)
+	i=i+1
+
+# We can use the method readlines() to save the text file to a list:
+files_as_list=file1.readlines()
+# each element of list corresponds to a line of the text
+print(files_as_list[0])
+#prints the second line
+print(files_as_list[1])
