@@ -1,0 +1,170 @@
+#WRITE AND SAVE FILES IN PYTHON
+
+exp2="d:/wasimyasin/documents/example2.txt"
+#the "w" is the writing mode and write() method saves the text file to a list.
+with open(exp2,"w") as writefile:
+	writefile.write("This is line A")
+
+# we can write the file to see if it worked
+with open(exp2,"r") as testwritefile:
+	print(testwritefile.read())
+
+# write multiple lines to file
+with open (exp2,"w") as writefile:
+	writefile.write("This is line 1\n")
+	writefile.write("This is line 2\n") #if the write method is already called, the second write method works consecutively
+
+#writing the elements of a list in the txt file using for loop
+list1=["This is line 1\n","This is line 2\n","This is line 3\n"]
+for i in list1:
+	with open(exp2,"w") as writefile:
+		writefile.write(line)
+		print(line)
+
+# However, note that setting the mode to w overwrites all the existing data in the file.
+
+# APPENDING FILES
+#We can write to files without losing any of the existing data as follows by setting the mode 
+#argument to append: a. you can append a new line as follows:
+exp3="d:\wasimyasin\documets\example2.txt"
+with open (exp3,"a") as appendfile:
+	appendfile.write("This is line C\n")
+	appendfile.write("This is line D\n")
+	appendfile.write("This is line E\n")
+
+#verifying if the new lines are in the text file
+with open (exp3,"r") as testappendfile:
+	print(testappendfile.read())
+#It's fairly ineffecient to open the file in a or w and then reopening it in r to read any lines
+#	r+ : Reading and writing. Cannot truncate the file.
+#	w+ : Writing and reading. Truncates the file.
+#	a+ : Appending and Reading. Creates a new file, if none exists.
+
+"""It is often very useful to know where the 'cursor' is in a file and be able to control it. 
+The following methods allow us to do precisely this -
+
+.tell() - returns the current position in bytes
+.seek(offset,from) - changes the position by 'offset' bytes with respect to 'from'. 
+From can take the value of 0,1,2 corresponding to beginning, relative to current position and end"""
+
+with open(exp2,"a+") as testwritefile:
+	print("Initial Location {}.".format(testwritefile.tell()))
+
+	data=testwritefile.read()
+	if (not data): #empty strings return false in python
+		print("Read nothing!")
+	else:
+		print(testwritefile.read())
+	testwritefile.seek(0,0) # moves 0 bytes from the beginning
+
+	print("\n New Location : ".format(testwritefile.tell()))
+	data1=testwritefile.read()
+	if (not data1):
+		print("Read nothing")
+	else:
+		print(data1)
+
+	print("Location after read : {}".format(testwritefile.tell()))
+
+"""Finally, a note on the difference between w+ and r+. Both of these modes allow access to read and write methods, however, opening a file in w+ overwrites it and deletes all pre-existing data.
+To work with a file on existing data, use r+ and a+. While using r+, it can be useful to add a .truncate() method at the end of your data. This will reduce the file to your data and delete everything that follows.
+In the following code block, Run the code as it is first and then run it with the .truncate()."""
+
+with open('Example2.txt', 'r+') as testwritefile:
+    data = testwritefile.readlines()
+    testwritefile.seek(0,0) #write at beginning of file
+   
+    testwritefile.write("Line 1" + "\n")
+    testwritefile.write("Line 2" + "\n")
+    testwritefile.write("Line 3" + "\n")
+    testwritefile.write("finished\n")
+    #Uncomment the line below
+    #testwritefile.truncate()
+    testwritefile.seek(0,0)
+    print(testwritefile.read())
+	
+# COPY A FILE
+with open("Example2.txt","r") as readfile:
+	with open("Example3.txt","w") as writefile:
+		for line in readfile:
+			writefile.write(line)
+# we can read the file to see if everything works
+with open("Example3.txt","r") as tetswritefile:
+	print(testwritefile.read())
+
+"""Exercise 
+Your local university's Raptors fan club maintains a register of its active members on a .txt document. Every month they update the file by removing the members who are not active. You have been tasked with automating this with your Python skills.
+Given the file currentMem, Remove each member with a 'no' in their Active coloumn. Keep track of each of the removed members and append them to the exMem file. Make sure the format of the original files in preserved. (Hint: Do this by reading/writing whole lines and ensuring the header remains )
+Run the code block below prior to starting the exercise. The skeleton code has been provided for you, Edit only the cleanFiles function."""
+
+from random import randint as rnd
+
+memReg="members.txt"
+exReg="inactive.txt"
+fee=("yes","no")
+
+def genFiles(current, old):
+	with open(current,"w+") as writefile:
+		writefile.write("Membership No.\tDate Joined\tActive \n")	# columns
+		data="{:^13}  {:<11}  {:<6}\n"  #sets the spaces for the columns
+
+		for rowno in range(20):
+			date=str(rnd(2015,2020))+"-"+str(rnd(1,12))+"-"+str(rnd(1,25))	#generates a date using random
+			writefile.write(data.format(rnd(10000,99999)), date, fee([rnd(0,1)]))	# formats the data according to the columns
+
+	with open(old,"w+") as writefile:
+		writefile.write("Membership No.\tDate joined\tActive\n")	#columns
+		data="{:^13}  {:<11}  {:<6}\n"
+
+		for rowno in range(3):
+			date=str(rnd(2015,2020))+"-"+ str(rnd(1,12))+"-"+ str(rnd(1,25))
+			writefile.write(date.format(rnd(10000,999999)), date, fee([1]))
+
+genFiles(memReg, exReg)
+
+#erify your code
+def testMsg(passed):
+    if passed:
+       return 'Test Passed'
+    else :
+       return 'Test Failed'
+
+testWrite = "testWrite.txt"
+testAppend = "testAppend.txt" 
+passed = True
+
+genFiles(testWrite,testAppend)
+
+with open(testWrite,'r') as file:
+    ogWrite = file.readlines()
+
+with open(testAppend,'r') as file:
+    ogAppend = file.readlines()
+
+try:
+    cleanFiles(testWrite,testAppend)
+except:
+    print('Error')
+
+with open(testWrite,'r') as file:
+    clWrite = file.readlines()
+
+with open(testAppend,'r') as file:
+    clAppend = file.readlines()
+        
+# checking if total no of rows is same, including headers
+
+if (len(ogWrite) + len(ogAppend) != len(clWrite) + len(clAppend)):
+    print("The number of rows do not add up. Make sure your final files have the same header and format.")
+    passed = False
+    
+for line in clWrite:
+    if  'no' in line:
+        passed = False
+        print("Inactive members in file")
+        break
+    else:
+        if line not in ogWrite:
+            print("Data in file does not match original file")
+            passed = False
+print ("{}".format(testMsg(passed)))
