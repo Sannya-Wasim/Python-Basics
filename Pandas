@@ -1,0 +1,57 @@
+# https://eu-de.dataplatform.cloud.ibm.com/analytics/notebooks/v2/4b815234-769a-49a1-821a-55092e875751?projectid=b2c0ca01-e122-469b-a029-43fc8b6846e8&context=cpdaas
+# this is the link to see how the data is arranged in the table
+
+import pandas as pd
+# read data from csv file
+csv_path = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0101EN-SkillsNetwork/labs/Module%204/data/TopSellingAlbums.csv'
+df=pd.read_csv(csv_path)    # the read_csv is a function of pandas which the path of the csv file as its arguments and the varible df is a short form of dataframe
+print(df.head())    # prints the first five headings of the data frame
+
+# Read data from Excel File and print the first five rows
+
+xlsx_path = 'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/Chapter%204/Datasets/TopSellingAlbums.xlsx'
+
+df = pd.read_excel(xlsx_path)
+df.head()
+
+# We can access the column Length and assign it a new dataframe x:
+x=df[["Length"]]
+print(x)
+
+# VIEWING AND ACCESSING DATA
+# You can also get a column as a series. You can think of a Pandas series as a 1-D dataframe. Just use one bracket:
+x=df["Length"]
+print(x)
+
+# You can also get a column as a dataframe.
+x=df[["Artist"]]
+type(x)
+# Access to multiple columns
+y=[["Artist", "Length", "Genre"]]
+print(y)
+
+print(df.iloc[0,0])    # Access the value on the first row and the first column
+print(df.iloc[1,0])    # Access the value on the second row and the first column
+print(df.oloc[0,2])    # first row and third column
+print(df.iloc[1,2])    # second row and third column
+
+print(df.loc[1,"Artist"])   #You can access the column using the name as well
+print(df.loc[0,"Artist"])
+print(df.loc[2,"Length"])
+
+#You can perform slicing using both the index and the name of the column
+print(df.iloc[0:2,0:3])     # first two rows and first three columns
+df.loc[0:2, 'Artist':'Released']    # Slicing the dataframe using named
+
+# ASKKKKKK
+#Use the following list to convert the dataframe index df to characters and assign it to df_new; 
+#find the element corresponding to the row index a and column 'Artist'. Then select the rows a 
+#through d for the column 'Artist'
+df_new=df
+# what we have to do is we have to change the index of df whic are in numbers to the alphabets or characters and these indexes should be the same as the list provided so basicall we have to assign the elements of the list as the index of the dataframe
+# and since it is more appropriate to change the index of new dataframe rather than changing the existing one
+# therefore we copy the df to df_new and then make changes to it
+new_index=['a','b','c','d','e','f','g','h']
+df_new.index=new_index
+print(df_new[a,"Artist"])
+print(df_new[a:d,"Artist"])
