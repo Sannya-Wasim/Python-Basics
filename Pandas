@@ -43,7 +43,7 @@ print(df.loc[2,"Length"])
 print(df.iloc[0:2,0:3])     # first two rows and first three columns
 df.loc[0:2, 'Artist':'Released']    # Slicing the dataframe using named
 
-# ASKKKKKK
+
 #Use the following list to convert the dataframe index df to characters and assign it to df_new; 
 #find the element corresponding to the row index a and column 'Artist'. Then select the rows a 
 #through d for the column 'Artist'
@@ -55,3 +55,8 @@ new_index=['a','b','c','d','e','f','g','h']
 df_new.index=new_index
 print(df_new[a,"Artist"])
 print(df_new[a:d,"Artist"])
+
+
+
+# difference between loc and iloc
+# https://towardsdatascience.com/how-to-use-loc-and-iloc-for-selecting-data-in-pandas-bd09cb4c3d79
