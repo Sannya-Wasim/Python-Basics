@@ -1,0 +1,50 @@
+# TWO DIMENSIONAL NUMPY ARRAY
+A=[[11,12,13], [21,22,23], [31,32,33]]  #simple 2d array
+a=np.array(A)   #declaring the simple array to a numpy array
+print(A.ndim)   # 2 dimensional we can think of 2 not the dimensions like a matrix but the number of nested lists
+print(a.shape)  # (3,3) returns a tuple where 1st element corresponds to number of lists inside the list and the second element corresponds to size or number of columns in each list
+print(a.size)   # 9 multiplying no.of rows with number of columns
+
+print(a[0,1])   # prints the element that is in the first row and second column of the array
+print(a[0][1])  # we can also do it like this
+print(a[0,0:2]) # prints the element that is at the first row and the elements of the first two columns that are o position 0 and 1
+
+# Addition of matrices
+x=np.array([1,2],[0,1])
+y=np.array([0,1],[1,2])
+z=x+y
+
+# Multiplication of matrices with a scalar quantity
+print(2*y)
+
+# Multiplication of two arrays corresponds to an element-wise product, or Hadamard product.
+"""Hadamard product corresponds to multiplying each of the elements in the same position i.e 
+multiplying elements contained in the same color boxes together. The result is a new matrix that is the 
+same size as matrix Y or X. Each element in this new matrix is the product of the corresponding elements 
+in X and Y."""
+z=x*y
+print(z)  # hadamard product
+
+# multiplication of matrices
+a=np.array([0,1,1],[1,0,1])
+b=np.array([1,1],[1,1],[-1,1])
+# in linear algebra, In linear algebra, before we multiply matrix A by matrix B, we must make sure that the number of columns in matrix A in this case three is equal to the number of rows in matrix B, in this case three.
+
+"""From matrix multiplication, to obtain the ith row and jth column of the new matrix, we take the dot 
+product of the ith row of a with the jth columns of B. For the first column, first row we take the dot 
+product of the first row of A with the first column of B as follows. The result is zero. For the first 
+row and the second column of the new matrix, we take the dot product of the first row of the matrix A, 
+but this time we use the second column of matrix B, the result is two. For the second row and the first 
+column of the new matrix, we take the dot product of the second row of the matrix A. With the first column
+of matrix B, the result is zero. Finally, for the second row and the second column of the new matrix, we 
+take the dot product of the second row of the matrix A with the second column of matrix B, the result is 
+two."""
+
+# In numpy, we can define the numpy arrays A and B. We can perform matrix multiplication and assign it 
+# to array C. The result is the array C. It corresponds to the matrix multiplication of array A and B.
+c=np.dot(a,b)
+print(c)
+# calculate the sine of c
+print(np.sin(c))    # calculates the sine of each element of c
+# Get the transposed of C
+print(c.T)
