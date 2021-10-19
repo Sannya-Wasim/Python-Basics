@@ -1,0 +1,95 @@
+import numpy as np
+#A numpy array is similar to a list. It's usually fixed in size and each element is of the same type. 
+#We can cast a list to a numpy array by first importing numpy:
+a=np.array([0,1,2,3,4])
+print(type(a))      # numpy.ndarray this prints the type of array
+print(a.dtype)      # this printss the type of the data present in array
+print(a.size)
+print(a.ndim)       # 1 because it is a 1 dimensional array
+#he attribute shape is a tuple of integers indicating the size of the array in each dimension.
+print(a.shape)
+
+# INDEXING AND SLICING
+c=np.array([20,1,2,3,4])
+c[0]=100        # changing the value of data present at index 0 of c array
+c[4]=0
+d=c[1:4] # slicing elements from 1 to 4 which includes the first 3 elements
+c[3:5]=300,400
+
+# VECTOR ADDITION
+u=[1,0]     # simple addition of arrays
+v=[0,1]
+z=[]
+for n,m in zip(u,v):
+    z.append(n+m)
+
+u=np.array([1,0])
+v=np.array([0,1])
+z=u+v   # vector addition
+z=u-v   # vector subtraction
+
+# Numpy ARRAY MULTIPLICATION WITH A SCALAR
+y=[1,2]
+z=[]        # simple array multiplication with a scalar
+for i in y:
+    z.append(2*i)
+
+y=np.array([1,2])
+z=2*y   # numpy array multiplication with a scalar
+
+# Product of two numpy arrays
+u=[2,3]
+v=[3,4]     #Product of two simple arrays
+z=[]
+for i,j in zip(u,v):
+    z.append(i*j)
+
+u=np.array([2,3])
+v=np.array([3,4])       # Product of two numpy arrays
+z=u*v
+
+# DOT PRODUCT
+u=np.array([2,3])
+v=np.array([3,4]) 
+result=np.dot(u,v)
+
+# ADDING CONSTANT TO A NUMPY ARRAY
+u=np.array([1,2,3,-1])
+z=u+1      # numpy will add 1 to all the elements of the numpy array. This property is known as broadcasting
+
+# universal function is a function that operates on nd arrays
+u=np.array([1,-1,1,-1])
+mean_a=u.mean()
+b=np.array([1,-2,3,4,5])
+max_b=b.max()
+# universal functions are also functions that map numpy arrays to new numpy arrays
+print(np.pi)    # prints the value of pi
+x=np.array([0,np.pi/2,np.pi])
+y=np.sin(x)     # applying sine function to each element in array which creates a new array
+
+# Plotting mathematical functions
+np.linespace(-2,2,5)   # -2=initial point   2=final point   5 => no of samples to generate
+# the spaces are generated evenly when the number of samples are defined
+x=np.linespace(0,2*np.pi,100)   # generate 100 evenly spaced samples
+y=np.sin(x) # mapping array x on y to generate a new array
+
+# help us lot the function
+import matplotlib.pyplot as plt
+print(plt.plot(x,y))
+
+# Assign Value with List
+#Similarly, we can use a list to select more than one specific index. The list select contains several values:
+c=np.array([100,   1,   2, 300, 400])
+select = [0, 2, 3]
+# Use List to select elements
+d = c[select]
+print(d)
+#We can assign the specified elements to a new value. For example, we can assign the values to 100 000 as follows:
+# Assign the specified elements to new value
+c[select] = 100000
+print(c)
+
+# Get the standard deviation of numpy array
+a = np.array([1, -1, 1, -1])
+standard_deviation=a.std()
+print(standard_deviation)
